@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% load static %} {% load bootstrap5 %}
+
+{% block content %}
+  <div class="container">
+    {% if found_project %}
+      <h1>  Found this</h1>
+      <div class="card">
+        <div class="card-header">
+          <img src="{{found_project.screenshot.url}}" class="img-responsive" alt="project screenshot" style="width:100%;">
+        </div>
+        <div class="card-body">
+          <h1>{{found_project.name}}</h1>
+          <p>{{found_project.description}}</p>
+          <p>{{found_project.date_added}}</p>
+          <a href="{{found_project.live_link}}" target="_blank">Visit site</a>
+        </div>
+      </div>
+    {% else %}
+      <h1>That project doesn't exist</h1>
+    {% endif %}
+  </div>
+{% endblock content %}
