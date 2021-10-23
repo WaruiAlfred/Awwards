@@ -6,6 +6,17 @@
   <div class="container">
     <h1 class="text-center">Awwards</h1>
 
+    <!--Search project form-->
+    <div class="">
+      <form action="{% url 'search_project' %}" method="GET">
+        {% csrf_token %}
+        <div class="form-group d-flex">
+          <input type="text" class="form-control" name="project" placeholder="project name">
+          <input type="submit" class="btn btn-outline-info" value="Search project">
+        </div>
+      </form>
+    </div>
+
     <!--Posting project form-->
     <div class="">
       <!-- Button trigger modal -->
