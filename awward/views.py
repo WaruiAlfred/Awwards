@@ -50,6 +50,10 @@ def update_profile(request):
   }
   return render(request,'registration/update_profile.html',context)
 
-# def project(request): 
-#   '''Function handling post project form'''
-#   return render(request,'projects/project.html')
+def search_project(request): 
+  '''Function handling search project'''
+  if 'project' in request.GET and request.GET['project']: 
+    search_term = request.GET.get('project')
+    found_project = Projects.objects.filter(name=search_term).first()
+
+  return render(request,'search_results.html',{"found_project":found_project})
