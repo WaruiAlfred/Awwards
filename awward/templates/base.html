@@ -14,11 +14,15 @@
 
     {% block styles %}
       {% bootstrap_css %}
-      <link rel="stylesheet" href="">
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% endblock styles %}
-    
+  
   </head>
   <body>
+    {% include 'navbar.html' %}
+
     <!--Flash messages-->
     {% if messages %}
       {% for message in messages %}
@@ -31,8 +35,10 @@
     {% block content %}{% endblock content %}
     
     {% block scripts %}
-      {% bootstrap_javascript %}
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      {% bootstrap_javascript %}
       <script src="" async defer></script>
     {% endblock scripts %}
     

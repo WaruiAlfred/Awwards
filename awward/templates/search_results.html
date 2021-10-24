@@ -4,16 +4,16 @@
 {% block content %}
   <div class="container">
     {% if found_project %}
-      <h1>  Found this</h1>
+      <h1>  Found: </h1>
       <div class="card">
         <div class="card-header">
-          <img src="{{found_project.screenshot.url}}" class="img-responsive" alt="project screenshot" style="width:100%;">
+          <a href="{% url 'project_details' found_project.id %}"><img src="{{found_project.screenshot.url}}" class="img-responsive" alt="project screenshot" style="width:100%;"></a>
         </div>
         <div class="card-body">
           <h1>{{found_project.name}}</h1>
           <p>{{found_project.description}}</p>
-          <p>{{found_project.date_added}}</p>
-          <a href="{{found_project.live_link}}" target="_blank">Visit site</a>
+          <p>Posted on:{{found_project.date_added}} by {{found_project.project_owner.username}}</p>
+          <a href="{{found_project.live_link}}" target="_blank" style="text-decoration:none;"><i class="fa fa-external-link" aria-hidden="true"></i></a>
         </div>
       </div>
     {% else %}

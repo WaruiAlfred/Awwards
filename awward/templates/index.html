@@ -3,11 +3,12 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <div class="container">
-    <h1 class="text-center">Awwards</h1>
+
+  <div class="container-fluid">
+    <!--<h1 class="text-center">Awwards</h1>-->
 
     <!--Search project form-->
-    <div class="">
+    <!--<div class="">
       <form action="{% url 'search_project' %}" method="GET">
         {% csrf_token %}
         <div class="form-group d-flex">
@@ -15,21 +16,21 @@
           <input type="submit" class="btn btn-outline-info" value="Search project">
         </div>
       </form>
-    </div>
+    </div>-->
 
     <!--Posting project form-->
-    <div class="">
+    <!--<div class="">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Post Project
-      </button>
+      </button>-->
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Post Project</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -49,20 +50,87 @@
           </div>
         </div>
       </div>
+    </div>-->
+
+    <!--Main image-->
+    <div class="starter-image mb-5" style="background-image: url({% static 'images/starter_img.png' %});">
+      <div class="starter-image-content">
+        <h1 class="text-center">LEXUS DESIGN WHEEL</h1>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class=" col-md-2">
+            <div class="progress green">
+              <span class="progress-left">
+                  <span class="progress-bar"></span>
+              </span>
+              <span class="progress-right">
+                  <span class="progress-bar"></span>
+              </span>
+              <div class="progress-value">9.0</div>
+            </div>
+            <h2 class="text-center">Design</h2>
+          </div>
+          <div class=" col-md-2">
+            <div class="progress light">
+              <span class="progress-left">
+                  <span class="progress-bar"></span>
+              </span>
+              <span class="progress-right">
+                  <span class="progress-bar"></span>
+              </span>
+              <div class="progress-value">7.0</div>
+            </div>
+            <h2 class="text-center">Usability</h2>
+          </div>
+            <div class=" col-md-2">
+            <div class="progress pink">
+              <span class="progress-left">
+                  <span class="progress-bar"></span>
+              </span>
+              <span class="progress-right">
+                  <span class="progress-bar"></span>
+              </span>
+              <div class="progress-value">6.0</div>
+            </div>
+            <h2 class="text-center">Content</h2>
+          </div>
+          <div class=" col-md-2">
+            <div class="progress red">
+              <span class="progress-left">
+                  <span class="progress-bar"></span>
+              </span>
+              <span class="progress-right">
+                  <span class="progress-bar"></span>
+              </span>
+              <div class="progress-value">7.3</div>
+            </div>
+            <h2 class="text-center">Average</h2>
+          </div>
+          <div class=" col-md-2"></div>
+        </div>
+      </div>
     </div>
 
     <!--Displaying posted projects-->
-    <div class="">
+    <h1 class="text-center">PROJECTS</h1>
+    <div class="d-flex flex-row projects-display">
       {% for project in projects %}
-        <div class="card">
-          <div class="card-header">
-            <img src="{{project.screenshot.url}}" class="img-responsive" alt="project screenshot" style="width:100%;">
-          </div>
-          <div class="card-body">
-            <h1>{{project.name}}</h1>
-            <p>{{project.description}}</p>
-            <p>{{project.date_added}}</p>
-            <a href="{{project.live_link}}" target="_blank">Visit site</a>
+        <div class="m-3">
+          <div class="card p-2 all-projects-card">
+            <a href="{% url 'project_details' project.id %}"><img src="{{project.screenshot.url}}" class="img-responsive" alt="project screenshot" style="width:100%;"></a>
+            <div class="card-body">
+              <h1>{{project.name}}</h1>
+              <p>{{project.description|truncatechars:15}}</p>
+              <div class="d-flex justify-content-between">
+                <p><b>Posted on:</b>{{project.date_added}}</p>
+                <a href="{{project.live_link}}" target="_blank" style="text-decoration:none;"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+              </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <p><b>By:</b>{{project.project_owner.username}}</p>
+              <!--<img src="{{project.project_owner.profile.picture.url}}" alt="" width="50" height="50" class="rounded-circle me-1">-->
+              <button class="btn btn-info"><a href="{% url 'rate' project.id %}" style="text-decoration:none;color:white;"><i class="fa fa-star">Rate</i></a></button>
+            </div>
           </div>
         </div>
       {% endfor %}
