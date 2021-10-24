@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+{% load static %} {% load bootstrap5 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 p-3 post-project-form">
+        <h1 class="text-center">Submit your project</h1>
+        <form action="{% url 'post_project' %}" method="POST" enctype="multipart/form-data" style="width:800px;>
+          {% csrf_token %}
+          <fieldset class="form-group">
+            {{form|crispy}}
+          </fieldset>
+          <div class="form-group">
+            <input type="submit" class="btn btn-outline-info" value="Post Project" style="width:200px;">
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+{% endblock content %}
