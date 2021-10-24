@@ -1,5 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 from .forms import ProfileUpdateForm,UserUpdateForm,ProjectAddForm,ProjectRatingForm
 
@@ -10,19 +13,19 @@ def home(request):
   '''Function rendering the home page'''
   
   projects = Projects.objects.all() #obtaining all posted projects
-  
-  if request.method == 'POST': 
-    form = ProjectAddForm(request.POST,request.FILES)
-    if form.is_valid(): 
-      project=form.save(commit=False)
-      project.project_owner = request.user 
-      project.save()
-      messages.success(request,'Your project has been successfully posted!')
-      return redirect('home')
-  else: 
-    form = ProjectAddForm()
 
-  return render(request,'index.html',{"form":form,"projects":projects})
+  # if request.method == 'POST': 
+  #   form = ProjectAddForm(request.POST,request.FILES)
+  #   if form.is_valid(): 
+  #     project=form.save(commit=False)
+  #     project.project_owner = request.user 
+  #     project.save()
+  #     messages.success(request,'Your project has been successfully posted!')
+  #     return redirect('home')
+  # else: 
+  #   form = ProjectAddForm()
+
+  return render(request,'index.html',{"projects":projects})
 
 def profile(request): 
   '''Function rendering a logged in user's profile page'''
@@ -53,6 +56,22 @@ def update_profile(request):
   }
   return render(request,'registration/update_profile.html',context)
 
+@login_required(login_url='/accounts/login/')
+def post_project(request): 
+  '''Function handling post project'''
+  if request.method == 'POST': 
+    form = ProjectAddForm(request.POST,request.FILES)
+    if form.is_valid(): 
+      project=form.save(commit=False)
+      project.project_owner = request.user 
+      project.save()
+      messages.success(request,'Your project has been successfully posted!')
+      return redirect('home')
+  else: 
+    form = ProjectAddForm()
+
+  return render(request,'projects/post_project.html',{"form":form})
+
 def search_project(request): 
   '''Function handling search project'''
   if 'project' in request.GET and request.GET['project']: 
@@ -81,5 +100,8 @@ def rate_project(request,project_id):
 def project_details(request,project_id): 
   '''Function to obtain requested project's details'''
   project = Projects.objects.get(id=project_id)
-  ratings = Ratings.objects.get(project=project)
+  try:
+    ratings = Ratings.objects.get(project=project)
+  except ObjectDoesNotExist: 
+    raise Http404()
   return render(request,'projects/project_details.html',{"ratings":ratings})
