@@ -14,11 +14,12 @@
 
     {% block styles %}
       {% bootstrap_css %}
-      <link rel="stylesheet" href="">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% endblock styles %}
     
   </head>
-  <body>
+  <body style="background-image: url({% static 'images/login_register_bg.jpg' %});" class="registration-starter-image">
     <!--Flash messages-->
     {% if messages %}
       {% for message in messages %}

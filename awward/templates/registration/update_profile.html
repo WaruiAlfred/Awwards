@@ -6,17 +6,17 @@
   <div class="container">
     <div class="row">
       <div class="col-md-2"></div>
-      <div class="col-md-8">
-        <div class="card">
-          <form method="POST" enctype="multipart/form-data">
+      <div class="col-md-8 p-2">
+        <div class="card profile-update-card p-2">
+          <form method="POST" enctype="multipart/form-data" style="height:100%;">
             {% csrf_token %}
             <fieldset class="form-group">
-              <legend class="mb-4 text-center">Update Profile</legend>
+              <legend class="mb-4 text-center" style="text-decoration:underline;">Update Profile</legend>
               {{ u_form | crispy }}
               {{ p_form | crispy }}
             </fieldset>
             <div class="form-group mt-2">
-            <button class="btn btn-outline-info" type="submit">Update</button>
+            <button class="btn btn-outline-info" type="submit" style="width:500px;">Update</button>
             </div>
           </form>
         </div>

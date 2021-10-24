@@ -1,7 +1,50 @@
-{% extends 'registration/base.html' %} {% load bootstrap5 %}
+{% extends 'base.html' %} {% load bootstrap5 %} {% load static %}
 
 {% block content %}
   <div class="container">
-    <h3 class="text-center">{{user.username}}</h3>
+    <div class="">
+      <div class="row p-2">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 profile-img">
+          {% if profile.picture %}
+            <img src="{{profile.picture.url}}" alt="" width="300" height="300" class="rounded-circle">
+          {% else %}
+            <img src="{% static 'images/profile_pic.svg' %}" alt="" width="300" height="300" class="rounded-circle">
+          {% endif %}
+          
+          <h3 class="text-center"><b>{{user.username}}</b></h3>
+        </div>
+        <div class="col-md-4 ">
+          <div class="card p-2">
+            <p><b>Country:</b>{{profile.country}}</p>
+            <hr>
+            <p><b>Phone number:</b>{{profile.phone_number}}</p>
+            <hr>
+            <p><b>Email:</b>{{user.email}}</p>
+            <hr>
+            <p><b>Bio:</b>{{profile.bio}}</p>
+            <hr>
+            <button class="btn btn-info"><a href="{% url 'profileUpdate'%}" style="text-decoration:none;">Update Profile</a></button>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+    <div>
+      <h1 class="text-center bg-secondary">Posted Projects</h1>
+      <div class="d-flex flex-row" style="flex-wrap:wrap;">
+        {% for project in user_projects %}
+          <div class="m-2">
+            <div class="card p-2" style="width:400px;height:100%;">
+              <h3 class="text-center"><a href="{{found_project.live_link}}" target="_blank">{{project.name}}</a></h3>
+              <div class="card-body">
+                <p>{{project.description}}</p>
+                <h5>{{project.main_technology_used}}</h5>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 {% endblock content %}
