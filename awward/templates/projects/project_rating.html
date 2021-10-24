@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% load static %} {% load bootstrap5 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4 p-3">
+        <div class="card">
+          <div class="card-header">
+            <img src="{{project.screenshot.url}}" class="img-responsive" alt="project screenshot" style="width:100%;">
+          </div>
+          <div class="card-body">
+            <h1>{{project.name}}</h1>
+            <p>By: {{project.project_owner.username}}</p>
+            <a href="{{project.live_link}}" target="_blank">Visit site</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 p-3">
+        <form action="{% url 'rate' project.id %}" method="POST">
+          {% csrf_token %}
+          <fieldset class="form-group">
+            {{form|crispy}}
+            <input type="submit" class="btn btn-info" value="Submit Rate">
+          </fieldset>
+        </form>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+{% endblock content %}
