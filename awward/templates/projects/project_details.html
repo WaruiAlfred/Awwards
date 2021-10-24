@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load static %} {% load bootstrap5 %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="project-img">
+      <img src="{{ratings.project.screenshot.url}}" class="img-responsive" alt="project screenshot" style="width:100%;">
+    </div>
+    <div class="project-details">
+      <p>{{ratings.design_rate}}</p>
+      <p>{{ratings.usability_rate}}</p>
+      <p>{{ratings.content_rate}}</p>
+      <br>
+      <p>{{ratings.project.name}}</p>
+      <p>{{ratings.project.description}}</p>
+      <p>{{ratings.project.main_technology_used}}</p>
+      <p>By: {{ratings.project.project_owner.username}}</p>
+      <p>Posted on: {{ratings.project.date_added}}</p>
+      <a href="{{ratings.project.live_link}}" target="_blank">Visit site</a>
+    </div>
+  </div>
+{% endblock content %}
