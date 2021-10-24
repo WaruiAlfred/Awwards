@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
-from .forms import ProfileUpdateForm,UserUpdateForm,ProjectAddForm
 from django.contrib import messages
+
+from .forms import ProfileUpdateForm,UserUpdateForm,ProjectAddForm,ProjectRatingForm
+
 from .models import Profile,Projects
 
 #View functions
@@ -25,7 +27,8 @@ def home(request):
 def profile(request): 
   '''Function rendering a logged in user's profile page'''
   profile = Profile.objects.filter(user=request.user).first()
-  return render(request,'registration/profile.html',{"profile":profile})
+  user_projects = Projects.objects.filter(project_owner=request.user).all()
+  return render(request,'registration/profile.html',{"profile":profile,"user_projects":user_projects})
 
 def update_profile(request): 
   '''Function for user profile update'''
@@ -57,3 +60,20 @@ def search_project(request):
     found_project = Projects.objects.filter(name=search_term).first()
 
   return render(request,'search_results.html',{"found_project":found_project})
+
+def rate_project(request,project_id): 
+  '''Function for rating a project'''
+  project = Projects.objects.get(id=project_id)
+  user = request.user 
+  
+  if request.method == 'POST': 
+    form = ProjectRatingForm(request.POST)
+    if form.is_valid(): 
+      rate = form.save(commit=False)
+      rate.user = user
+      rate.project = project
+      rate.save()
+      return redirect('home')
+  else: 
+    form = ProjectRatingForm()
+  return render(request,'projects/project_rating.html',{"project":project,"form":form})
