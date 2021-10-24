@@ -3,7 +3,7 @@ from django.contrib import messages
 
 from .forms import ProfileUpdateForm,UserUpdateForm,ProjectAddForm,ProjectRatingForm
 
-from .models import Profile,Projects
+from .models import Profile,Projects, Ratings
 
 #View functions
 def home(request): 
@@ -77,3 +77,9 @@ def rate_project(request,project_id):
   else: 
     form = ProjectRatingForm()
   return render(request,'projects/project_rating.html',{"project":project,"form":form})
+
+def project_details(request,project_id): 
+  '''Function to obtain requested project's details'''
+  project = Projects.objects.get(id=project_id)
+  ratings = Ratings.objects.get(project=project)
+  return render(request,'projects/project_details.html',{"ratings":ratings})
