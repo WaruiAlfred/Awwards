@@ -5,53 +5,6 @@
 {% block content %}
 
   <div class="container-fluid">
-    <!--<h1 class="text-center">Awwards</h1>-->
-
-    <!--Search project form-->
-    <!--<div class="">
-      <form action="{% url 'search_project' %}" method="GET">
-        {% csrf_token %}
-        <div class="form-group d-flex">
-          <input type="text" class="form-control" name="project" placeholder="project name">
-          <input type="submit" class="btn btn-outline-info" value="Search project">
-        </div>
-      </form>
-    </div>-->
-
-    <!--Posting project form-->
-    <!--<div class="">
-      <!-- Button trigger modal -->
-      <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Post Project
-      </button>-->
-
-      <!-- Modal -->
-      <!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Post Project</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form action="{% url 'home' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                  {{form|crispy}}
-                </fieldset>
-                <div class="form-group">
-                  <input type="submit" class="btn btn-outline-info btn-sm" value="Post">
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
-
     <!--Main image-->
     <div class="starter-image mb-5" style="background-image: url({% static 'images/starter_img.png' %});">
       <div class="starter-image-content">
