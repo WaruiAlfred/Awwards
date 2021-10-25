@@ -8,7 +8,7 @@
       <div class="col-md-3"></div>
       <div class="col-md-6 p-3 post-project-form">
         <h1 class="text-center">Submit your project</h1>
-        <form action="{% url 'post_project' %}" method="POST" enctype="multipart/form-data" style="width:800px;>
+        <form action="{% url 'post_project' %}" method="POST" enctype="multipart/form-data" style="width:800px;">
           {% csrf_token %}
           <fieldset class="form-group">
             {{form|crispy}}
