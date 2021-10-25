@@ -43,7 +43,11 @@ There are known bugs.
 * POSTGRESQL
 * MARKDOWN for the *README.md* file
 ## Some screenshots
-<img src="" alt="" >
+<img src="/screenshots/pic1.png" alt="site" >
+<img src="/screenshots/pic2.png" alt="site" >
+<img src="/screenshots/pic3.png" alt="site" >
+<img src="/screenshots/pic4.png" alt="site" >
+<img src="/screenshots/pic5.png" alt="site" >
 
 ## My contacts
 Feel free to contact me for assistance if need be or to offer suggestions for improvements.
